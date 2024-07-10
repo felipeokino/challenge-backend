@@ -3,7 +3,7 @@
   "packageManager": "yarn@3.6.0",
   "version": "1.0.0",
   "scripts": {
-    "start": "node dist/server.js",
+    "start": "tsup src && node dist/server.js",
     "dev": "tsx watch src/server.ts",
     "build": "tsup src"
   },

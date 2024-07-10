@@ -31,9 +31,9 @@ export const userController = {
     });
     return res.status(200).json(user);
   },
-  
+
   async findAll(req: Request, res: Response) {
-    const users = await User.findAll();
+    const users = await User.findAll() || [];
     return res.status(200).json(users);
   },
 }

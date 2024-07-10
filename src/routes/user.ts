@@ -51,10 +51,10 @@ const router = express.Router();
  */
 router.get('/', async (req: Request, res: Response) => {
   try {
-    const users = await userController.findAll(req, res);
-    res.json(users);
+    await userController.findAll(req, res);
   } catch (error) {
-    res.status(500).json({ message: 'Error retrieving users' });
+    console.log('error');
+    // res.status(500).json({ message: 'Error retrieving users' });
   }
 });
 
@@ -122,7 +122,7 @@ router.get('/', async (req: Request, res: Response) => {
 
 router.post('/', async (req: Request, res: Response) => {
   try {
-    return await userController.store(req, res);
+     await userController.store(req, res);
   } catch (error) {
     res.status(500).json({ message: 'Error creating user' });
   }
@@ -188,8 +188,7 @@ router.post('/', async (req: Request, res: Response) => {
  */
 router.get('/:id', authMiddleware,  async (req: Request, res: Response) => {
   try {
-    const user = await User.findByPk(req.params.id);
-    res.json(user);
+     await User.findByPk(req.params.id);
   } catch (error) {
     res.status(500).json({ message: 'Error retrieving user' });
   }
@@ -262,10 +261,7 @@ router.get('/:id', authMiddleware,  async (req: Request, res: Response) => {
  */
 router.put('/:id', async (req: Request, res: Response) => {
   try {
-    const user = await User.update(req.body, {
-      where: { id: req.params.id },
-    });
-    res.json(user);
+     await userController.update(req, res);
   } catch (error) {
     res.status(500).json({ message: 'Error updating user' });
   }
@@ -325,10 +321,7 @@ router.put('/:id', async (req: Request, res: Response) => {
  */
 router.delete('/:id', authController.validateToken, async (req: Request, res: Response) => {
   try {
-    const user = await User.destroy({
-      where: { id: req.params.id },
-    });
-    res.json(user);
+     await userController.destroy(req, res);
   } catch (error) {
     res.status(500).json({ message: 'Error deleting user' });
   }

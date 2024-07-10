@@ -1,7 +1,9 @@
-import { swaggerSpec } from './swagger';
+import { swaggerSpec, swaggerUIOptions } from './swagger';
 import express from 'express';
 
 import swaggerUi from 'swagger-ui-express';
+import swaggerJsDocs from 'swagger-jsdoc';
+
 import cors from 'cors';
 import dotenv from 'dotenv';
 import './database';
@@ -14,7 +16,7 @@ const apiPrefix = `/api${apiVersion}`;
 
 app.use(cors());
 app.use(express.json());
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerJsDocs(swaggerSpec), swaggerUIOptions));
 
 app.use(`${apiPrefix}/users`, require('./routes/user'));
 app.use(apiPrefix, require('./routes/auth'));

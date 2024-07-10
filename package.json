@@ -2,10 +2,12 @@
   "name": "challenge-backend",
   "packageManager": "yarn@3.6.0",
   "version": "1.0.0",
+  "main": "index.js",
   "scripts": {
-    "start": "tsup src && node dist/server.js",
-    "dev": "tsx watch src/server.ts",
-    "build": "tsup src"
+    "start": "yarn install && yarn sequelize db:migrate && nodemon dist/index.js",
+    "dev": "tsx watch src/index.ts",
+    "build": "rm -rf dist && tsup src",
+    "vercel-build": "yarn sequelize db:migrate"
   },
   "dependencies": {
     "@types/cors": "^2.8.17",

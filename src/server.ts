@@ -15,6 +15,8 @@ app.use(express.json());
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use('/api', require('./routes/challenge'));
+app.use('/api/users', require('./routes/user'));
+app.use('/api', require('./routes/auth'));
 
 app.listen(3000, () => {
   console.log('Server is running on port 3000');

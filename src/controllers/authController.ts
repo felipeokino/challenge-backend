@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-import User from '../models/User';
+import User from '../models/UserModel';
 import 'dotenv'
 
 import { Request, Response } from 'express';

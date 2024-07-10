@@ -1,5 +1,5 @@
-
 require('dotenv').config()
+const pg = require('pg');
 module.exports = {
   username: process.env.POSTGRES_USER,
   password: process.env.POSTGRES_PASSWORD,
@@ -10,6 +10,7 @@ module.exports = {
   logging: false,
   dialectOptions: {
     ssl: true,
+    module: pg,
   },
   define: {
     timestamps: true,

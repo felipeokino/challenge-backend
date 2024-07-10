@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import User from '../models/User';
+import User from '../models/UserModel';
 import { userController } from '../controllers/userController';
 import { authController } from '../controllers/authController';
 import authMiddleware from '../middleware/authMiddleware';

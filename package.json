@@ -4,9 +4,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "yarn install && yarn sequelize db:migrate && nodemon dist/index.js",
+    "start": "yarn install && yarn sequelize db:migrate && nodemon dist/api/index.js",
     "dev": "tsx watch src/index.ts",
-    "build": "rm -rf dist && tsup src",
+    "build": "rm -rf dist && tsc",
     "vercel-build": "yarn sequelize db:migrate"
   },
   "dependencies": {

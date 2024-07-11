@@ -55,12 +55,6 @@ const router = express.Router();
  *                   type: string
  *                   description: The error message
  */
-router.post('/login', async (req: Request, res: Response) => {
-  try {
-    return await authController.login(req, res);
-  } catch (error) {
-    res.status(500).json({ message: 'Error logging in' });
-  }
-});
+router.post('/login', authController.login);
 
 module.exports = router;

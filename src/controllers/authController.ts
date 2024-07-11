@@ -1,32 +1,41 @@
-const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 import User from '../models/UserModel';
+import { HTTPStatusCodes } from '../utils';
 import 'dotenv'
 
 import { Request, Response } from 'express';
 
 export const authController = {
-  async findUser(email: string, password: string): Promise<User | null> {
-     return await User.findOne({ where: { email, password } })
-  },
 
   async login(req: Request, res: Response) {
+    console.log('LOG: authController.login started');
     const { email, password } = req.body;
+
+    console.log('LOG: authController.login email: ' + email);
+
     try {
-      const user = await this.findUser(email, password);
+      const user = await User.findOne({ where: { email, password } });
 
       if (!user) {
-        throw new Error('User not found');
+        return res.status(HTTPStatusCodes.NOT_FOUND).json({ message: 'User not found' });
+      }
+      const userResponse = {
+        id: user.get('id'),
+        email: user.get('email'),
+        name: user.get('name'),
       }
 
       const token = jwt.sign({ id: user.get('id') }, process.env.JWT_SECRET);
-      res.status(200).json({ token });
+      res.status(HTTPStatusCodes.OK).json({ token, user: userResponse });
     } catch (error: any) {
-      res.status(404).json({ error: error.message });
+      res.status(HTTPStatusCodes.INTERNAL_SERVER_ERROR).json({ error: error.message });
+    } finally {
+      console.log('LOG: authController.login ended');
     }
   },
 
   async validateToken(req: Request, res: Response): Promise<boolean> {
+    console.log('LOG: authController.validateToken started');
     const token = req.headers.authorization?.split(' ')[1];
     if (!token) {
       return false;
@@ -40,6 +49,8 @@ export const authController = {
       return true;
     } catch (error: any) {
       return false;
+    } finally {
+      console.log('LOG: authController.validateToken ended');
     }
   },
 };

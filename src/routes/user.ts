@@ -49,13 +49,7 @@ const router = express.Router();
  *                   type: string
  *                   description: The error message
  */
-router.get('/', async (req: Request, res: Response) => {
-  try {
-    await userController.findAll(req, res);
-  } catch (error) {
-    res.status(500).json({ message: 'Error retrieving users' });
-  }
-});
+router.get('/', authMiddleware, userController.findAll);
 
 /**
  * @swagger
@@ -119,13 +113,7 @@ router.get('/', async (req: Request, res: Response) => {
  *                   description: The error message
  */
 
-router.post('/', async (req: Request, res: Response) => {
-  try {
-     await userController.store(req, res);
-  } catch (error) {
-    res.status(500).json({ message: 'Error creating user' });
-  }
-});
+router.post('/', userController.store);
 
 /**
  * @swagger
@@ -185,13 +173,7 @@ router.post('/', async (req: Request, res: Response) => {
  *                   type: string
  *                   description: The error message
  */
-router.get('/:id', authMiddleware,  async (req: Request, res: Response) => {
-  try {
-     await User.findByPk(req.params.id);
-  } catch (error) {
-    res.status(500).json({ message: 'Error retrieving user' });
-  }
-});
+router.get('/:id', authMiddleware, userController.show);
 
 /**
  * @swagger
@@ -258,13 +240,7 @@ router.get('/:id', authMiddleware,  async (req: Request, res: Response) => {
  *                   type: string
  *                   description: The error message
  */
-router.put('/:id', async (req: Request, res: Response) => {
-  try {
-     await userController.update(req, res);
-  } catch (error) {
-    res.status(500).json({ message: 'Error updating user' });
-  }
-});
+router.put('/:id', authMiddleware, userController.update);
 
 /**
  * @swagger
@@ -318,12 +294,6 @@ router.put('/:id', async (req: Request, res: Response) => {
  *                   type: string
  *                   description: The error message 
  */
-router.delete('/:id', authController.validateToken, async (req: Request, res: Response) => {
-  try {
-     await userController.destroy(req, res);
-  } catch (error) {
-    res.status(500).json({ message: 'Error deleting user' });
-  }
-});
+router.delete('/:id', authController.validateToken, userController.destroy);
 
 module.exports = router;

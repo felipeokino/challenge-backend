@@ -12,5 +12,5 @@ user.sync();
 const product = Product.initModel(sequelize);
 product.sync();
 
-module.exports = sequelize;
+export default sequelize;
 

@@ -22,6 +22,7 @@ app.use(`${apiPrefix}/users`, require('./routes/user'));
 app.use(apiPrefix, require('./routes/auth'));
 app.use('/', require('./routes/status'));
 app.use(`${apiPrefix}/products`, require('./routes/products'));
+app.use(`${apiPrefix}/seeds`, require('./routes/seeds'));
 
 app.listen(3000, () => {
   console.log('Server is running on port 3000');

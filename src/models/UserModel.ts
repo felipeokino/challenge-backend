@@ -15,7 +15,7 @@ export default class User extends Model<UserAttributes> {
       password: DataTypes.STRING,
     }, {
       sequelize,
-      modelName: 'User',
+      modelName: 'user',
     })
   }
 }

@@ -383,7 +383,7 @@ productsRouter.get('/:id', authMiddleware, productController.show);
  *                   description: Error message
  *                   example: Error updating product
  */             
-
+productsRouter.put('/:id', authMiddleware, productController.update);
 
 /**
  * @swagger
@@ -446,5 +446,6 @@ productsRouter.get('/:id', authMiddleware, productController.show);
  * 
  */
 productsRouter.delete('/:id', authMiddleware, productController.delete);
+
 
 module.exports = productsRouter;

@@ -5,6 +5,7 @@ type ProductAttributes = {
   name: string;
   description: string;
   price: number;
+  deletedAt: Date | null;
 }
 
 export default class Product extends Model<ProductAttributes> {
@@ -13,9 +14,10 @@ export default class Product extends Model<ProductAttributes> {
       name: DataTypes.STRING,
       description: DataTypes.STRING,
       price: DataTypes.FLOAT,
+      deletedAt: DataTypes.DATE,
     }, {
       sequelize,
-      modelName: 'Product',
+      modelName: 'product',
     })
   }
 }

@@ -49,7 +49,7 @@ const productController = {
         return res.status(404).json({ message: 'Product not found' });
 
       const productUpdated = await Product.update({ name, description, price }, {
-        where: { id: productId },
+        where: { id: productId, deletedAt: null },
       });
       if (!productUpdated)
         return res.status(HTTPStatusCodes.NOT_FOUND).json({ message: 'Product not found' });

@@ -1,4 +1,5 @@
-import { Sequelize } from 'sequelize';
+import { Options, Sequelize } from 'sequelize';
+
 const database = require('../config/database');
 import User from '../models/UserModel';
 import Product from '../models/ProductModel';

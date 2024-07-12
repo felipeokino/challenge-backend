@@ -8,15 +8,22 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import './database';
 
+const CSS_URL =
+  "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css";
+
 dotenv.config();
+
 
 const app = express();
 const apiVersion = '/v1';
 const apiPrefix = `/api${apiVersion}`;
 
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerJsDocs(swaggerSpec), swaggerUIOptions, {
+  customCssUrl: CSS_URL,
+}));
 app.use(cors());
 app.use(express.json());
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerJsDocs(swaggerSpec), swaggerUIOptions));
+
 
 app.use(`${apiPrefix}/users`, require('./routes/user'));
 app.use(apiPrefix, require('./routes/auth'));

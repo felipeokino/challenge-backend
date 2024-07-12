@@ -26,7 +26,7 @@ export const swaggerSpec: swaggerJSDoc.Options = {
       bearerAuth: []
     }]
   },
-  apis: ['./src/**/*.ts'],
+  apis: ['./src/**/*.ts', './src/**/*.js'],
 };
 
 export const swaggerUIOptions = {
@@ -38,6 +38,6 @@ export const swaggerUIOptions = {
         in:   'header'
       },
       value:  'Bearer <token>'
-    }
+    },
   }
 }

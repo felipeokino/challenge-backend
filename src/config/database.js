@@ -1,5 +1,6 @@
-require('dotenv').config()
+require('dotenv').config();
 const pg = require('pg');
+
 module.exports = {
   username: process.env.POSTGRES_USER,
   password: process.env.POSTGRES_PASSWORD,
